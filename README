@@ -1,12 +1,12 @@
-#  Prerequisites:
+ Prerequisites:
 - DeepStreamSDK 5.0
 - Python 3.6
 - Gst-python
 
-# Test Enviromen:
+ Test Enviromen:
 - Jetson NX
 
-# Running Prerequisites:
+ Running Prerequisites:
 - Put yolov3.weights to /opt/nvidia/deepstream/deepstream/sources/deepstream_python_apps/apps/deepstream-yolov3-python,weights file can download with darknet official website:https://pjreddie.com/media/files/yolov3.weights
 - Compile so library:
 -  put diretory nvdsinfer_custom_impl_Yolo in /opt/nvidia/deepstream/deepstream/sources/objectDetector_Yolo,modify nvdsparsebbox_Yolo.cpp 
@@ -55,7 +55,7 @@ engine-create-func-name=NvDsInferYoloCudaEngineGet
 nms-iou-threshold=0.3
 threshold=0.7
 
-# To run:
+ To run:
   $ python3 deepstream_test_3.py <uri1> [uri2] ... [uriN]
   
 e.g.
@@ -63,6 +63,6 @@ e.g.
   
   $ python3 deepstream_test_3.py rtsp://127.0.0.1/video1 rtsp://127.0.0.1/video2
   
-# more info can visit my blogs:
+ more info can visit my blogs:
 
 
