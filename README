@@ -1,0 +1,59 @@
+Prerequisites:
+- DeepStreamSDK 5.0
+- Python 3.6
+- Gst-python
+
+Test Enviromen:
+- Jetson NX
+
+Running Prerequisites:
+- Put yolov3.weights to /opt/nvidia/deepstream/deepstream/sources/deepstream_python_apps/apps/deepstream-yolov3-python,weights file can download with darknet official website:https://pjreddie.com/media/files/yolov3.weights
+- Compile so library:
+-  put diretory nvdsinfer_custom_impl_Yolo in /opt/nvidia/deepstream/deepstream/sources/objectDetector_Yolo,modify nvdsparsebbox_Yolo.cpp 
+
+static const int NUM_CLASSES_YOLO = 80;
+then :
+export CUDA_VER=10.2
+make
+copy libnvdsinfer_custom_impl_Yolo.so in /opt/nvidia/deepstream/deepstream/sources/deepstream_python_apps/apps/deepstream-yolov3-python/nvdsinfer_custom_impl_Yolo
+
+modify config_infer_primary_yoloV3.txt
+
+
+[property]
+gpu-id=0
+net-scale-factor=0.0039215697906911373
+#0=RGB, 1=BGR
+model-color-format=0
+custom-network-config=yolov3.cfg
+model-file=yolov3.weights
+model-engine-file=model_b1_gpu0_fp16.engine
+labelfile-path=labels.txt
+int8-calib-file=yolov3-calibration.table.trt7.0
+## 0=FP32, 1=INT8, 2=FP16 mode
+network-mode=2
+num-detected-classes=80
+gie-unique-id=1
+network-type=0
+is-classifier=0
+## 0=Group Rectangles, 1=DBSCAN, 2=NMS, 3= DBSCAN+NMS Hybrid, 4 = None(No clustering)
+cluster-mode=2
+maintain-aspect-ratio=1
+parse-bbox-func-name=NvDsInferParseCustomYoloV3
+custom-lib-path=nvdsinfer_custom_impl_Yolo/libnvdsinfer_custom_impl_Yolo.so
+engine-create-func-name=NvDsInferYoloCudaEngineGet
+#scaling-filter=0
+#scaling-compute-hw=0
+
+[class-attrs-all]
+nms-iou-threshold=0.3
+threshold=0.7
+
+To run:
+  $ python3 deepstream_test_3.py <uri1> [uri2] ... [uriN]
+e.g.
+  $ python3 deepstream_test_3.py file:///home/ubuntu/video1.mp4 file:///home/ubuntu/video2.mp4
+  $ python3 deepstream_test_3.py rtsp://127.0.0.1/video1 rtsp://127.0.0.1/video2
+# more info can visit my blogs:
+
+
