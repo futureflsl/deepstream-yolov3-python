@@ -11,11 +11,17 @@
 - Compile so library:
 -  put diretory nvdsinfer_custom_impl_Yolo in /opt/nvidia/deepstream/deepstream/sources/objectDetector_Yolo,modify nvdsparsebbox_Yolo.cpp 
 
+
 static const int NUM_CLASSES_YOLO = 80;
+
 then :
+
 export CUDA_VER=10.2
+
 make
+
 copy libnvdsinfer_custom_impl_Yolo.so in /opt/nvidia/deepstream/deepstream/sources/deepstream_python_apps/apps/deepstream-yolov3-python/nvdsinfer_custom_impl_Yolo
+
 
 modify config_infer_primary_yoloV3.txt
 
@@ -51,9 +57,12 @@ threshold=0.7
 
 # To run:
   $ python3 deepstream_test_3.py <uri1> [uri2] ... [uriN]
+  
 e.g.
   $ python3 deepstream_test_3.py file:///home/ubuntu/video1.mp4 file:///home/ubuntu/video2.mp4
+  
   $ python3 deepstream_test_3.py rtsp://127.0.0.1/video1 rtsp://127.0.0.1/video2
+  
 # more info can visit my blogs:
 
 
