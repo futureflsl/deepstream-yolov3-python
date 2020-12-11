@@ -63,6 +63,6 @@ e.g.
   
   $ python3 deepstream_test_3.py rtsp://127.0.0.1/video1 rtsp://127.0.0.1/video2
   
- more info can visit my blogs:
+ more info can visit my blogs:https://blog.csdn.net/FL1623863129/article/details/111034113
 
 
